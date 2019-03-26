@@ -48,5 +48,5 @@
 
 ## Usage
 
-1. Compile `g++ mgsort.cpp -o mgsort`
-2. Run `./mgsort input.txt`
+1. Compile `g++ mgsort.cpp -o mgsort.out`
+2. Run `./mgsort.out input.txt`
