@@ -18,14 +18,25 @@
 #include <cstdlib> // for atoi(), which changes a string to integer
 #include <string>
 #include <chrono>  // for run time measure
+#include <ctime>
 using namespace std;
 
 /* partition in quick sort */
 int partition(int *keys, int start, int end)
 {
+	int exc; // for exchange
+
+	/* randomly select pivot */
+	srand(time(NULL));
+	int pivot_index = rand() % (end - start) + start;
+	
+	/* switch pivot to the end */
+	exc               = keys[pivot_index];
+	keys[pivot_index] = keys[end];
+	keys[end]         = exc;
+
 	int pivot = keys[end];
 	int i = start - 1;
-	int exc; // for exchange
 
 	for (int j = start; j < end; j++)
 	{
