@@ -1,5 +1,5 @@
 /*
- * Program: Insertion Sort implementation
+ * Program: Insertion Sort implementation with run time measure.
  * Author: cst.andy, EE depart., NCKU
  *
  * Input file form:
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <cstdlib> // for atoi(), which changes a string to integer
 #include <string>
+#include <chrono>  // for run time measure
 using namespace std;
 
 /* insertion sort algorithm */
@@ -88,8 +89,19 @@ int main(int argc, char* argv[])
     /* close the input file after read */
     iFile.close();
 
+	/* record the time point before sorting */
+	auto begin = chrono::high_resolution_clock::now();
+
 	/* insertion sort */
 	issort(keys, keyNum);
+
+	/* record the time point after sorting */
+	auto stop = chrono::high_resolution_clock::now();
+
+	/* print the run time to screen */
+	auto duration = chrono::duration_cast<chrono::microseconds>(stop - begin);
+	cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
 
     oFile.open(OFILENAME, ios::out);
 

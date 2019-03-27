@@ -1,5 +1,5 @@
 /*
- * Program: Merge Sort implementation
+ * Program: Merge Sort implementation with run time measure.
  * Author: cst.andy, EE depart., NCKU
  *
  * Input file form:
@@ -18,6 +18,7 @@
 #include <cstdlib> // for atoi(), which changes a string to integer
 #include <limits>  // for max(), which gives the maximun value of a type
 #include <string>
+#include <chrono>  // for run time measure
 using namespace std;
 
 /* merge 2 sorted part in to 1 */
@@ -114,7 +115,19 @@ int main(int argc, char* argv[])
     /* close the input file after read */
     iFile.close();
 
+	/* record the time point before sorting */
+	auto begin = chrono::high_resolution_clock::now();
+
+	/* merge sort */
     mgsort(keys, 0, keyNum - 1);
+
+	/* record the time point after sorting */
+	auto stop = chrono::high_resolution_clock::now();
+
+	/* print the run time to screen */
+	auto duration = chrono::duration_cast<chrono::microseconds>(stop - begin);
+	cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
 
     oFile.open(OFILENAME, ios::out);
 
