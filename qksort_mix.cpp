@@ -28,13 +28,11 @@ void issort(int *keys, int length)
 	int key;
 	int index;
 
-	for (int i = 1; i < length; i++)
+	for (int i = 0; i < length; i++)
 	{
 		key = keys[i];
 
-
 		/* insert keys[i] into the sorted sequence keys[0...i-1] */
-		
 		index = i - 1;
 		
 		while (index >= 0 && keys[index] > key)
@@ -80,14 +78,12 @@ void qksort(int *keys, int start, int end)
 {
 	if (start < end)
 	{
-		int mid = partition(keys, start, end);
-
 		if (end - start > BOUND_NUM) {
+			int mid = partition(keys, start, end);
 			qksort(keys, start, mid - 1);
 			qksort(keys, mid + 1, end);	
 		} else {
-			issort(keys, mid - start);
-			issort(keys + mid + 1, end - mid);
+			issort(keys + start, end - start + 1);
 		}
 	}
 }
